@@ -24,7 +24,7 @@ class _myAppState extends State<myApp> {
       ChangeNotifierProvider(create: (context) => ListProvider(),)
     ],
     child: MaterialApp(
-      
+      debugShowCheckedModeBanner: false,
       title: 'Trivia Game',
       theme: ThemeData(
         fontFamily: GoogleFonts.prompt().fontFamily,
