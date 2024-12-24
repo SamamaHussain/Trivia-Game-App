@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:trivia_game_app/ListProvider.dart';
-import 'package:trivia_game_app/pages/GamePage.dart';
+import 'package:trivia_game_app/pages/HomePage.dart';
 
 
 
@@ -30,7 +30,7 @@ class _myAppState extends State<myApp> {
         fontFamily: GoogleFonts.prompt().fontFamily,
         useMaterial3: false,
       ),
-      home: gamePage(),
+      home: HomePage(),
     ),
     );
 }

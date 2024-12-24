@@ -8,3 +8,4 @@ const MaterialColor purpleMaterialColor = MaterialColor(0xFFBA9BE8, <int, Color>
 const Color purpleColor = Color(0xFFBA9BE8);
 const Color greenColor = Color(0xFF87DEA8);
 const Color redColor = Color(0xFFED8D8D);
+const Color yellowColor = Color(0xFFFAD188);
