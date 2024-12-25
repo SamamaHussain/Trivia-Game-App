@@ -39,6 +39,8 @@ dependencies:
   get_it: ^8.0.3
   dio: ^5.7.0
   google_fonts: ^6.2.1
+  font_awesome_flutter: ^10.8.0
+  html: ^0.15.5
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart';
 import 'package:trivia_game_app/utillities/colors.dart';
 
 class GamePageProvider extends ChangeNotifier {
@@ -38,7 +39,11 @@ class GamePageProvider extends ChangeNotifier {
   }
 
   String getCurrentQuestionText() {
-    return questions![currentQuestionCount]['question'];
+    String _question = questions![currentQuestionCount]['question'];
+    var document = parse(_question);
+    String _unescapedQuestion =
+        parse(document.body!.text).documentElement!.text;
+    return _unescapedQuestion;
   }
 
   void answerQuestion(String answer) {
@@ -64,6 +69,14 @@ class GamePageProvider extends ChangeNotifier {
     }
   }
 
+ void resetGame(){
+   currentQuestionCount = 0;
+   correctAnswerCount = 0;
+   incorrectAnswerCount = 0;
+   notifyListeners();
+ }
+
+// Widgets for the game page
 endGame(){
   showDialog(
           context: context,
@@ -74,42 +87,51 @@ endGame(){
             borderRadius: BorderRadius.circular(16.0),
             side: BorderSide(width: 3, color: Colors.black),
           ),
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                        'Game Over',
-                        style: TextStyle(
-                            fontSize: 35,
-                            color: purpleColor,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
-                  Text(
-                        'Score: $correctAnswerCount / ${_maxQuestions+1}',
-                        style: TextStyle(
-                            fontSize: 35,
-                            color: purpleColor,
-                            fontWeight: FontWeight.bold),
-                      ),
-
-                ],
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text(
+                          'Game Over',
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: purpleColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 10),
+                    Text(
+                          'Score: $correctAnswerCount / ${_maxQuestions}',
+                          style: const TextStyle(
+                              fontSize: 35,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                
+                  ],
+                ),
               ),
               actions: [
-                TextButton(onPressed: () {
-                  Navigator.pop(context);
-                  currentQuestionCount = 0;
-                }, child: const Text('Retry',style: TextStyle(
-                        fontSize: 20,
-                        color: purpleColor,
-                        fontWeight: FontWeight.bold),)),
-                TextButton(onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                }, child: const Text('Close',style: TextStyle(
-                        fontSize: 20,
-                        color: purpleColor,
-                        fontWeight: FontWeight.bold),)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(onPressed: () {
+                      currentQuestionCount = 0;
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      notifyListeners();
+                    }, child: const Text('Retry',style: TextStyle(
+                            fontSize: 20,
+                            color: purpleColor,
+                            fontWeight: FontWeight.bold),)),
+                    TextButton(onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    }, child: const Text('Close',style: TextStyle(
+                            fontSize: 20,
+                            color: purpleColor,
+                            fontWeight: FontWeight.bold),)),
+                  ],
+                ),
               ],
             );
           });
@@ -120,19 +142,19 @@ endGame(){
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              backgroundColor: purpleColor,
+              backgroundColor: Colors.white,
               shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
-            side: BorderSide(width: 3, color: Colors.white),
+            side: const BorderSide(width: 3, color: Colors.black),
           ),
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              content: Wrap(
+                alignment: WrapAlignment.center,
                 children: [
                    Text(
                     answer,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 35,
-                        color: Colors.white,
+                        color: purpleColor,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(width: 3),
@@ -145,8 +167,9 @@ endGame(){
               ),
             );
           });
-          await Future.delayed(Duration(milliseconds: 1000),);
+          if(currentQuestionCount != _maxQuestions){
+          await Future.delayed(const Duration(milliseconds: 1000),);
           Navigator.pop(
-              context);
+              context);}
   }
 }
