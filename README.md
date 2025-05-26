@@ -37,6 +37,7 @@ Please ⭐ star the repo if you find it helpful!
 | **Flutter**                          | Cross-platform app development           |
 | **Firebase**                         | User authentication and backend support  |
 | **Provider**                         | State management                         |
+| **Open Trivia Database API**         | API for getting quiz content    |
 | **flutter_dev**                      | General Flutter utilities and helpers    |
 
 ## 🤓 Author
