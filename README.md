@@ -22,13 +22,16 @@ Please ⭐ star the repo if you find it helpful!
 
 <!-- Add your screenshots to the /ss folder and use this layout -->
 
-<!-- 
+
 | App UI |
 |--------|
-| <img src="ss/1.png" width="300"> |
-| <img src="ss/2.png" width="300"> |
-| <img src="ss/3.png" width="300"> |
--->
+| <img src="Screenshots/Screenshot_20250527-225403_1.png" width="300"> |
+| <img src="Screenshots/Screenshot_20250527-225425_1.png" width="300"> |
+| <img src="Screenshots/Screenshot_20250527-225504_1.png" width="300"> |
+| <img src="Screenshots/Screenshot_20250527-225504_2.png" width="300"> |
+| <img src="Screenshots/Screenshot_20250527-225523_1.png" width="300"> |
+| <img src="Screenshots/Screenshot_20250527-225617_1.png" width="300"> |
+
 
 ## 🔌 Technologies Used
 
